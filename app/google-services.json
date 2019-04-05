@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "12232986412",
+    "firebase_url": "https://uride-aa244.firebaseio.com",
+    "project_id": "uride-aa244",
+    "storage_bucket": "uride-aa244.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12232986412:android:87a3e49b22e8a76f",
+        "android_client_info": {
+          "package_name": "np.com.softwarica.uride"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAszEtN4R87RL1s-1aHCCChOpMo7GIjoL4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "12232986412-827k7h5pj8ft0g0j1hn454ei69pj923l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
