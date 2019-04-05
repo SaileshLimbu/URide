@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="np.com.gsewa.uffride.activities.LoginActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg"
+        android:fitsSystemWindows="true">
+
+        <ImageView
+            android:layout_width="@dimen/img_logo_width"
+            android:layout_height="@dimen/img_logo_height"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="122dp"
+            android:src="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="225dp"
+            android:fontFamily="@font/quicksand"
+            android:text="@string/str_en_enter_phone_number"
+            android:textColor="#FFF"
+            android:textSize="@dimen/text_size_xlarge" />
+
+        <LinearLayout
+            android:id="@+id/ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textTitle"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:orientation="horizontal"
+            android:padding="@dimen/padding_xlarge">
+
+            <TextView
+                android:id="@+id/txtCountryCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand"
+                android:text="+977"
+                android:textColor="#FFF"
+                android:textSize="@dimen/text_size_xlarge" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#FFF" />
+
+            <EditText
+                android:id="@+id/txtPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:fontFamily="@font/quicksand"
+                android:hint="Phone number"
+                android:inputType="number"
+                android:textColor="#FFF"
+                android:textColorHint="#DDD"
+                android:textSize="@dimen/text_size_xlarge" />
+        </LinearLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll"
+            android:layout_marginLeft="@dimen/padding_xlarge"
+            android:layout_marginRight="@dimen/padding_xlarge"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/chkTos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="I agree to"
+                android:textColor="@color/colorWhite"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/quicksand"
+                android:onClick="openTOS"
+                android:padding="5dp"
+                android:text="Terms and Conditions"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/text_size_medium"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/chkTos"
+                app:layout_constraintStart_toEndOf="@+id/chkTos"
+                app:layout_constraintTop_toTopOf="@+id/chkTos" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <Button
+            android:id="@+id/btnSend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/constraintLayout"
+            android:layout_marginLeft="@dimen/margin_xlarge"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginRight="@dimen/margin_xlarge"
+            android:background="#2e67da"
+            android:fontFamily="@font/quicksand"
+            android:onClick="sendVerification"
+            android:text="@string/str_en_send_verification_code"
+            android:textColor="#fff"
+            android:textSize="@dimen/text_size_medium"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </RelativeLayout>
+</layout>

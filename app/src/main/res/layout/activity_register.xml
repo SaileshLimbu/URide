@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_below="@+id/toolbar"
+            android:background="@color/colorPrimary" />
+
+        <ImageView
+            android:id="@+id/image_logo"
+            android:layout_width="@dimen/img_logo_width"
+            android:layout_height="@dimen/img_logo_height"
+            android:layout_below="@id/toolbar"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/logo" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/rlBottom"
+            android:layout_below="@+id/image_logo"
+            android:layout_margin="16dp"
+            app:cardCornerRadius="5dp">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/text1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:text="@string/str_en_enter_details_to_signup"
+                        android:textColor="#444"
+                        android:textSize="@dimen/text_size_large" />
+
+                    <RelativeLayout
+                        android:id="@+id/rl1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/text1"
+                        android:layout_marginTop="5dp">
+
+                        <ImageView
+                            android:id="@+id/image1"
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="8dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_user" />
+
+                        <TextView
+                            android:id="@+id/label_fullname"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_toRightOf="@id/image1"
+                            android:fontFamily="@font/quicksand_medium"
+                            android:text="@string/str_en_full_name_caps"
+                            android:textColor="#C8C8C8"
+                            android:textSize="@dimen/text_size_medium" />
+
+                        <EditText
+                            android:id="@+id/textFullName"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_below="@id/label_fullname"
+                            android:layout_marginLeft="8dp"
+                            android:layout_toRightOf="@id/image1"
+                            android:background="@drawable/drawable_edittext"
+                            android:fontFamily="@font/quicksand_medium"
+                            android:hint="@string/str_en_enter_fullname"
+                            android:inputType="textCapWords"
+                            android:textColorHint="#999"
+                            android:textSize="@dimen/text_size_medium" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rl1"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp">
+
+                        <ImageView
+                            android:id="@+id/image2"
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_email" />
+
+                        <TextView
+                            android:id="@+id/label_email"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_toRightOf="@id/image2"
+                            android:fontFamily="@font/quicksand_medium"
+                            android:text="@string/str_en_email_address_caps"
+                            android:textColor="#C8C8C8"
+                            android:textSize="@dimen/text_size_medium" />
+
+                        <EditText
+                            android:id="@+id/textEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_below="@id/label_email"
+                            android:layout_marginLeft="8dp"
+                            android:layout_toRightOf="@id/image2"
+                            android:background="@drawable/drawable_edittext"
+                            android:fontFamily="@font/quicksand_medium"
+                            android:hint="@string/str_en_enter_email_address"
+                            android:inputType="textEmailAddress"
+                            android:textColorHint="#999"
+                            android:textSize="@dimen/text_size_medium" />
+
+                    </RelativeLayout>
+
+                    <Button
+                        android:id="@+id/btnProceed"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/button_height"
+                        android:layout_below="@id/rl2"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/colorPrimary"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:onClick="registerAsUser"
+                        android:text="@string/str_en_signup_as_user"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/text_size_large" />
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/button_height"
+                        android:layout_below="@id/btnProceed"
+                        android:layout_marginTop="5dp"
+                        android:background="#d6390e"
+                        android:onClick="registerAsDriver"
+                        android:text="@string/str_en_signup_as_driver"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/text_size_large" />
+
+                </RelativeLayout>
+
+            </ScrollView>
+        </android.support.v7.widget.CardView>
+
+        <RelativeLayout
+            android:id="@+id/rlBottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/text3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/quicksand_light"
+                android:text="@string/str_en_by_signing_up_you_agree_to_our"
+                android:textSize="@dimen/text_size_medium" />
+
+            <LinearLayout
+                android:id="@+id/ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text3"
+                android:layout_centerHorizontal="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/quicksand_light"
+                    android:text="@string/str_en_terms_of_services"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/quicksand_light"
+                    android:text="@string/str_en_and"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/quicksand_light"
+                    android:text="@string/str_en_privacy_policy"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_medium" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>
