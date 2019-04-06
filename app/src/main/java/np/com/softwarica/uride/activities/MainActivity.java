@@ -38,7 +38,5 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .tilt(60)
                 .build();
         map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
-
     }
 }

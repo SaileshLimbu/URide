@@ -2,54 +2,66 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar" />
-
-        <View
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:layout_below="@+id/toolbar"
-            android:background="@color/colorPrimary" />
+            android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/image_logo"
-            android:layout_width="@dimen/img_logo_width"
-            android:layout_height="@dimen/img_logo_height"
-            android:layout_below="@id/toolbar"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/logo" />
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/rlBottom"
-            android:layout_below="@+id/image_logo"
-            android:layout_margin="16dp"
-            app:cardCornerRadius="5dp">
-
-            <ScrollView
+            <View
+                android:id="@+id/view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="180dp"
+                android:background="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-                <RelativeLayout
+            <ImageView
+                android:id="@+id/image_logo"
+                android:layout_width="@dimen/img_logo_width"
+                android:layout_height="@dimen/img_logo_height"
+                android:layout_below="@id/toolbar"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="match_parent"
+                android:layout_height="294dp"
+                android:layout_margin="16dp"
+                app:cardCornerRadius="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_logo">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical"
                     android:padding="16dp">
 
                     <TextView
                         android:id="@+id/text1"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/quicksand_medium"
                         android:text="@string/str_en_enter_details_to_signup"
+                        android:textAlignment="center"
                         android:textColor="#444"
                         android:textSize="@dimen/text_size_large" />
 
@@ -162,34 +174,33 @@
                         android:textColor="#fff"
                         android:textSize="@dimen/text_size_large" />
 
-                </RelativeLayout>
-
-            </ScrollView>
-        </android.support.v7.widget.CardView>
-
-        <RelativeLayout
-            android:id="@+id/rlBottom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="8dp">
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
 
             <TextView
-                android:id="@+id/text3"
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:fontFamily="@font/quicksand_light"
                 android:text="@string/str_en_by_signing_up_you_agree_to_our"
-                android:textSize="@dimen/text_size_medium" />
+                android:textSize="@dimen/text_size_medium"
+                app:layout_constraintBottom_toTopOf="@+id/ll"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView"
+                app:layout_constraintVertical_bias="1.0" />
 
             <LinearLayout
                 android:id="@+id/ll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/text3"
-                android:layout_centerHorizontal="true"
-                android:orientation="horizontal">
+                android:layout_marginBottom="@dimen/margin_xmedium"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -215,7 +226,6 @@
                     android:textSize="@dimen/text_size_medium" />
             </LinearLayout>
 
-        </RelativeLayout>
-
-    </RelativeLayout>
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
 </layout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="np.com.softwarica.uride.models.CarItem" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drawable_touchable">
+
+        <LinearLayout
+            android:id="@+id/item_car"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/icon_car"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:src="@drawable/vehicle_1"
+                app:imageResource="@{item.carIcon}" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/car_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/quicksand"
+                    android:text="@{item.carName}"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="@dimen/text_size_medium"
+                    android:textStyle="bold"
+                    tools:text="Sedan" />
+
+                <TextView
+                    android:id="@+id/car_seats"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/quicksand_light"
+                    android:text='@{item.carSeats + " Seats"}'
+                    android:textColor="@color/textColorSecondary"
+                    android:textSize="@dimen/text_size_small"
+                    tools:text="4 Seats" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@id/ll"
+            android:background="#F1F1F1" />
+    </RelativeLayout>
+</layout>

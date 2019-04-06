@@ -13,7 +13,16 @@
           "package_name": "np.com.softwarica.uride"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "12232986412-1fe99uaq07879pis775t8sej3u0o0o17.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "np.com.softwarica.uride",
+            "certificate_hash": "e677d6ee33140843e39e309d201d7db02cdc611d"
+          }
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAszEtN4R87RL1s-1aHCCChOpMo7GIjoL4"

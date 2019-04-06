@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="np.com.softwarica.uride">
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
@@ -10,11 +11,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activities.VerificationActivity"></activity>
+        <activity android:name=".activities.SignupCompleteActivity" />
+        <activity android:name=".activities.AddInsuranceDetailsActivity" />
+        <activity android:name=".activities.AddDriverLicenseActivity" />
+        <activity android:name=".activities.AddVehicleDetailsActivity" />
+        <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".activities.MainActivity" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".activities.LoginActivity"
+            android:theme="@style/TranslucentTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

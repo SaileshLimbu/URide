@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_below="@id/toolbar"
+            android:background="@color/colorPrimary" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            app:cardCornerRadius="5dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/text1"
+                    android:fontFamily="@font/quicksand_medium"
+                    android:text="@string/str_en_congratulation"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="@dimen/text_size_large" />
+
+                <TextView
+                    android:id="@+id/text1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/imageMail"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/quicksand_medium"
+                    android:text="@string/str_en_signup_success"
+                    android:textAlignment="center"
+                    android:textColor="#666"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <ImageView
+                    android:id="@+id/imageMail"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="60dp"
+                    android:src="@drawable/ic_mail" />
+
+                <TextView
+                    android:id="@+id/text2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imageMail"
+                    android:fontFamily="@font/quicksand_medium"
+                    android:text="@string/str_en_document_review_1"
+                    android:textAlignment="center"
+                    android:textColor="#666"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text2"
+                    android:text="@string/str_en_document_review_2"
+                    android:textAlignment="center"
+                    android:textColor="#666"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <Button
+                    android:id="@+id/btnDone"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/colorPrimary"
+                    android:fontFamily="@font/quicksand_medium"
+                    android:onClick="onDonePressed"
+                    android:text="@string/str_en_done"
+                    android:textColor="#FFF"
+                    android:textSize="@dimen/text_size_large" />
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
+</layout>
