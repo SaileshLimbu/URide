@@ -14,6 +14,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 
 import np.com.softwarica.uride.R;
+import np.com.softwarica.uride.activities.drivers.AddVehicleDetailsActivity;
 import np.com.softwarica.uride.databinding.ActivityRegisterBinding;
 import np.com.softwarica.uride.utils.FirebaseUtils;
 import np.com.softwarica.uride.utils.NetworkUtils;

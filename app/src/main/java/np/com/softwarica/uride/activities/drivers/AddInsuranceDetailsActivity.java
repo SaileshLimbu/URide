@@ -1,4 +1,4 @@
-package np.com.softwarica.uride.activities;
+package np.com.softwarica.uride.activities.drivers;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import np.com.softwarica.uride.R;
+import np.com.softwarica.uride.activities.SignupCompleteActivity;
 import np.com.softwarica.uride.databinding.ActivityAddInsuranceDetailsBinding;
 import np.com.softwarica.uride.utils.ImageUtils;
 import np.com.softwarica.uride.utils.NetworkUtils;

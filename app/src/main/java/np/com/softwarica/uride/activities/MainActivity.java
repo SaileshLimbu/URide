@@ -1,5 +1,6 @@
 package np.com.softwarica.uride.activities;
 
+import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -12,15 +13,17 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import np.com.softwarica.uride.R;
+import np.com.softwarica.uride.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
+    private ActivityMainBinding b;
     private GoogleMap map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        b = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);

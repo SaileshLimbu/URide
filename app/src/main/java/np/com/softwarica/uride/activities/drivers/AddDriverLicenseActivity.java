@@ -1,4 +1,4 @@
-package np.com.softwarica.uride.activities;
+package np.com.softwarica.uride.activities.drivers;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -17,8 +17,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;

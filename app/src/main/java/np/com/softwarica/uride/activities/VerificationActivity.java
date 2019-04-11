@@ -10,10 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,6 +27,9 @@ import com.stfalcon.smsverifycatcher.SmsVerifyCatcher;
 import java.util.concurrent.TimeUnit;
 
 import np.com.softwarica.uride.R;
+import np.com.softwarica.uride.activities.drivers.AddDriverLicenseActivity;
+import np.com.softwarica.uride.activities.drivers.AddInsuranceDetailsActivity;
+import np.com.softwarica.uride.activities.drivers.AddVehicleDetailsActivity;
 import np.com.softwarica.uride.databinding.ActivityVerificationBinding;
 import np.com.softwarica.uride.utils.NetworkUtils;
 import np.com.softwarica.uride.utils.SharedPref;

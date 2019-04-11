@@ -11,11 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.VerificationActivity"></activity>
+        <activity android:name=".activities.ProfileActivity"></activity>
+        <activity android:name=".activities.VerificationActivity" />
         <activity android:name=".activities.SignupCompleteActivity" />
-        <activity android:name=".activities.AddInsuranceDetailsActivity" />
-        <activity android:name=".activities.AddDriverLicenseActivity" />
-        <activity android:name=".activities.AddVehicleDetailsActivity" />
+        <activity android:name=".activities.drivers.AddInsuranceDetailsActivity" />
+        <activity android:name=".activities.drivers.AddDriverLicenseActivity" />
+        <activity android:name=".activities.drivers.AddVehicleDetailsActivity" />
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.MainActivity" />
 
@@ -23,7 +24,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".activities.LoginActivity"
+        <activity
+            android:name=".activities.LoginActivity"
             android:theme="@style/TranslucentTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
