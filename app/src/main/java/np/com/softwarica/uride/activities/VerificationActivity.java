@@ -27,9 +27,7 @@ import com.stfalcon.smsverifycatcher.SmsVerifyCatcher;
 import java.util.concurrent.TimeUnit;
 
 import np.com.softwarica.uride.R;
-import np.com.softwarica.uride.activities.drivers.AddDriverLicenseActivity;
-import np.com.softwarica.uride.activities.drivers.AddInsuranceDetailsActivity;
-import np.com.softwarica.uride.activities.drivers.AddVehicleDetailsActivity;
+import np.com.softwarica.uride.activities.passengers.RegisterPassengerActivity;
 import np.com.softwarica.uride.databinding.ActivityVerificationBinding;
 import np.com.softwarica.uride.utils.NetworkUtils;
 import np.com.softwarica.uride.utils.SharedPref;
@@ -148,74 +146,59 @@ public class VerificationActivity extends AppCompatActivity {
         String verificationCode = code1 + code2 + code3 + code4 + code5 + code6;
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, verificationCode);
 
-        auth.signInWithCredential(credential)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        final FirebaseUser user = task.getResult().getUser();
-                        //Layer1
-                        database.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.hasChild(user.getUid())) {
-                                    //openActivity(UserDashboardActivity.class);
-                                    openActivity(MainActivity.class);
-                                    finish();
-                                } else {
-                                    //Layer2
-                                    database.child("drivers").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(DataSnapshot dataSnapshot) {
-                                            if (dataSnapshot.hasChild(user.getUid())) {
-                                                int documentLevel = Integer.parseInt(dataSnapshot.child(user.getUid()).child("documentUploadLevel").getValue().toString());
-                                                switch (documentLevel) {
-                                                    case 0:
-                                                        openActivity(AddVehicleDetailsActivity.class);
-                                                        break;
-                                                    case 1:
-                                                        openActivity(AddDriverLicenseActivity.class);
-                                                        break;
-                                                    case 2:
-                                                        openActivity(AddInsuranceDetailsActivity.class);
-                                                        break;
-                                                    case 3:
-                                                        SharedPref.setString(VerificationActivity.this, "isDriver", "true");
-                                                        //openActivity(DriverDashboardActivity.class);
-                                                        openActivity(MainActivity.class);
-                                                        break;
-                                                }
-                                                dialog.dismiss();
-                                                finish();
-                                            } else {
-                                                dialog.dismiss();
-                                                Intent intent = new Intent(VerificationActivity.this, RegisterActivity.class);
-                                                intent.putExtra("phoneNumber", phoneNumber);
-                                                startActivity(intent);
-                                                finish();
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onCancelled(DatabaseError databaseError) {
-                                            dialog.dismiss();
-                                            Toast.makeText(VerificationActivity.this, "You have cancel the process.", Toast.LENGTH_SHORT);
-                                        }
-                                    });
+        auth.signInWithCredential(credential).addOnCompleteListener(this, task -> {
+            if (task.isSuccessful()) {
+                final FirebaseUser user = task.getResult().getUser();
+                //Layer1
+                database.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.hasChild(user.getUid())) {
+                            //openActivity(UserDashboardActivity.class);
+                            openActivity(MainActivity.class);
+                            finish();
+                        } else {
+                            //Layer2
+                            database.child("drivers").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.hasChild(user.getUid())) {
+                                        SharedPref.setString(VerificationActivity.this, "isDriver", "true");
+                                        //openActivity(DriverDashboardActivity.class);
+                                        openActivity(MainActivity.class);
+                                        dialog.dismiss();
+                                        finish();
+                                    } else {
+                                        dialog.dismiss();
+                                        Intent intent = new Intent(VerificationActivity.this, RegisterPassengerActivity.class);
+                                        intent.putExtra("phoneNumber", phoneNumber);
+                                        startActivity(intent);
+                                        finish();
+                                    }
                                 }
-                            }
 
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                                dialog.dismiss();
-                                Toast.makeText(VerificationActivity.this, "You have cancel the process.", Toast.LENGTH_SHORT);
-                            }
-                        });
-                    } else {
-                        if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                            dialog.dismiss();
-                            Log.d("ERRORR", task.getException().getMessage());
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                    dialog.dismiss();
+                                    Toast.makeText(VerificationActivity.this, "You have cancel the process.", Toast.LENGTH_SHORT);
+                                }
+                            });
                         }
                     }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        dialog.dismiss();
+                        Toast.makeText(VerificationActivity.this, "You have cancel the process.", Toast.LENGTH_SHORT);
+                    }
                 });
+            } else {
+                if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                    dialog.dismiss();
+                    Log.d("ERROR", task.getException().getMessage());
+                }
+            }
+        });
     }
 
     public void openActivity(Class<?> cls) {
@@ -239,6 +222,5 @@ public class VerificationActivity extends AppCompatActivity {
             super.onCodeSent(verificationId, forceResendingToken);
             dialog.dismiss();
         }
-
     }
 }

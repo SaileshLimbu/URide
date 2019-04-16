@@ -12,4 +12,10 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
+    <style name="ratingBar" parent="Theme.AppCompat">
+        <item name="colorControlActivated">#FBA93B</item>
+        <item name="colorControlNormal">#000</item>
+    </style>
+
+
 </resources>

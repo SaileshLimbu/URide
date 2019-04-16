@@ -23,9 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.concurrent.TimeUnit;
 
 import np.com.softwarica.uride.R;
-import np.com.softwarica.uride.activities.drivers.AddDriverLicenseActivity;
-import np.com.softwarica.uride.activities.drivers.AddInsuranceDetailsActivity;
-import np.com.softwarica.uride.activities.drivers.AddVehicleDetailsActivity;
+import np.com.softwarica.uride.activities.passengers.RegisterPassengerActivity;
 import np.com.softwarica.uride.databinding.ActivityLoginBinding;
 import np.com.softwarica.uride.utils.NetworkUtils;
 import np.com.softwarica.uride.utils.SharedPref;
@@ -55,23 +53,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void sendVerification(View view) {
-        if (!NetworkUtils.isConnected(this)) {
-            ToastUtils.showErrorToast(this, getResources().getString(R.string.str_en_no_internet));
-            return;
-        }
-
-        if (!b.chkTos.isChecked()) {
-            ToastUtils.showErrorToast(this, "Please accept our terms and conditions.");
+        if (!validate()) {
             return;
         }
 
         final String phoneNumber = countryDialCode + b.txtPhone.getText().toString().trim();
 
-        if (b.txtPhone.getText().toString().isEmpty()) {
-            b.txtPhone.setError("Please enter phone number.");
-            b.txtPhone.setFocusable(true);
-            return;
-        }
         dialog.setMessage("Sending Verification Code...");
         dialog.setCancelable(false);
         dialog.show();
@@ -85,70 +72,55 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
                         dialog.setMessage("Verifying...");
-                        auth.signInWithCredential(phoneAuthCredential)
-                                .addOnCompleteListener(LoginActivity.this, task -> {
-                                    if (task.isSuccessful()) {
-                                        final FirebaseUser user = task.getResult().getUser();
-                                        //Check if FirebaseUser has an account under USER section
-                                        database.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                                if (dataSnapshot.hasChild(user.getUid())) {
-                                                    openActivity(MainActivity.class);
-                                                    finish();
-                                                } else {
-                                                    //Check if FirebaseUser has an account under DRIVER section
-                                                    database.child("drivers").addListenerForSingleValueEvent(new ValueEventListener() {
-                                                        @Override
-                                                        public void onDataChange(DataSnapshot dataSnapshot) {
-                                                            if (dataSnapshot.hasChild(user.getUid())) {
-                                                                int documentLevel = Integer.parseInt(dataSnapshot.child(user.getUid()).child("documentUploadLevel").getValue().toString());
-                                                                switch (documentLevel) {
-                                                                    case 0:
-                                                                        openActivity(AddVehicleDetailsActivity.class);
-                                                                        break;
-                                                                    case 1:
-                                                                        openActivity(AddDriverLicenseActivity.class);
-                                                                        break;
-                                                                    case 2:
-                                                                        openActivity(AddInsuranceDetailsActivity.class);
-                                                                        break;
-                                                                    case 3:
-                                                                        SharedPref.setString(LoginActivity.this, "isDriver", "true");
-                                                                        openActivity(MainActivity.class);
-                                                                        break;
-                                                                }
-                                                                dialog.dismiss();
-                                                                finish();
-                                                            } else {
-                                                                //If no account found prompt them to register
-                                                                dialog.dismiss();
-                                                                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                                                                intent.putExtra("phoneNumber", b.txtPhone.getText().toString().trim());
-                                                                startActivity(intent);
-                                                            }
-                                                        }
-
-                                                        @Override
-                                                        public void onCancelled(DatabaseError databaseError) {
-                                                            dialog.dismiss();
-                                                            Toast.makeText(LoginActivity.this, "You have cancel the process.", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    });
+                        auth.signInWithCredential(phoneAuthCredential).addOnCompleteListener(LoginActivity.this, task -> {
+                            if (task.isSuccessful()) {
+                                final FirebaseUser user = task.getResult().getUser();
+                                //Check if FirebaseUser has an account under USER section
+                                database.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot.hasChild(user.getUid())) {
+                                            openActivity(MainActivity.class);
+                                            finish();
+                                        } else {
+                                            //Check if FirebaseUser has an account under DRIVER section
+                                            database.child("drivers").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                                    if (dataSnapshot.hasChild(user.getUid())) {
+                                                        SharedPref.setString(LoginActivity.this, "isDriver", "true");
+                                                        openActivity(MainActivity.class);
+                                                        dialog.dismiss();
+                                                        finish();
+                                                    } else {
+                                                        //If no account found prompt them to register
+                                                        dialog.dismiss();
+                                                        Intent intent = new Intent(LoginActivity.this, RegisterPassengerActivity.class);
+                                                        intent.putExtra("phoneNumber", b.txtPhone.getText().toString().trim());
+                                                        startActivity(intent);
+                                                    }
                                                 }
-                                            }
 
-                                            @Override
-                                            public void onCancelled(DatabaseError databaseError) {
-                                                dialog.dismiss();
-                                                Toast.makeText(LoginActivity.this, "You have cancel the process.", Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
-                                    } else {
+                                                @Override
+                                                public void onCancelled(DatabaseError databaseError) {
+                                                    dialog.dismiss();
+                                                    Toast.makeText(LoginActivity.this, "You have cancel the process.", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
                                         dialog.dismiss();
-                                        ToastUtils.showErrorToast(LoginActivity.this, task.getException().getMessage());
+                                        Toast.makeText(LoginActivity.this, "You have cancel the process.", Toast.LENGTH_SHORT).show();
                                     }
                                 });
+                            } else {
+                                dialog.dismiss();
+                                ToastUtils.showErrorToast(LoginActivity.this, task.getException().getMessage());
+                            }
+                        });
                     }
 
                     @Override
@@ -171,6 +143,25 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    private boolean validate() {
+        if (!NetworkUtils.isConnected(this)) {
+            ToastUtils.showErrorToast(this, getResources().getString(R.string.str_en_no_internet));
+            return false;
+        }
+
+        if (!b.chkTos.isChecked()) {
+            ToastUtils.showErrorToast(this, "Please accept our terms and conditions.");
+            return false;
+        }
+
+        if (b.txtPhone.getText().toString().isEmpty()) {
+            b.txtPhone.setError("Please enter phone number.");
+            b.txtPhone.setFocusable(true);
+            return false;
+        }
+        return true;
     }
 
     public void openActivity(Class<?> cls) {

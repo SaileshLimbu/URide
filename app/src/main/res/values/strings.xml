@@ -87,7 +87,7 @@
     <string name="str_en_pickup_address_small">Pickup Address</string>
     <string name="str_en_reject_request">Reject Request</string>
     <string name="str_en_accept_request">Accept Request</string>
-    <string name="str_en_enter_details_to_signup">ENTER DETAILS TO SIGNUP</string>
+    <string name="str_en_enter_details_to_signup">ENTER DETAILS TO SIGNUP AS PASSENGER</string>
     <string name="str_en_full_name_caps">FULL NAME</string>
     <string name="str_en_enter_fullname">Enter Fullname</string>
     <string name="str_en_email_address_caps">EMAIL ADDRESS</string>
@@ -154,8 +154,8 @@
     <string name="str_en_enter_modal_name">Enter Modal Name</string>
     <string name="str_en_year">YEAR</string>
     <string name="str_en_enter_year">Enter Year</string>
-    <string name="str_en_color">COLOR</string>
-    <string name="str_en_enter_color">Enter Color</string>
+    <string name="str_en_vehicle_color">VEHICLE COLOR</string>
+    <string name="str_en_enter_vehicle_color">Enter Color</string>
     <string name="str_en_select_vehicle">SELECT VEHICLE</string>
     <string name="str_en_take_photo">TAKE PHOTO</string>
     <string name="str_en_expiry_date">EXPIRY DATE</string>
@@ -166,4 +166,7 @@
     <string name="str_en_upload_vehicle_license">UPLOAD VEHICLE LICENSE</string>
     <string name="str_en_vehicle_registration">VEHICLE REGISTRATION</string>
     <string name="str_en_vehicle_insurance">VEHICLE INSURANCE</string>
+    <string name="en_enter_driver_details_to_signup">ENTER DRIVER DETAILS TO SIGNUP</string>
+    <string name="str_en_vehicle_number">Vehicle Number</string>
+    <string name="str_en_enter_vehicle_number">Enter Vehicle Number</string>
 </resources>
