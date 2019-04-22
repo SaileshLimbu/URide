@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">URide</string>
     <string name="verified_desc"><![CDATA[Your account is successfully verified. Please add a valid card to   start making trips & Earn.]]></string>
-    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipsicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut allquip ex ea commodo consequat.</string>
-
     <string name="str_en_add_payment">Add Payment</string>
     <string name="str_en_notification">Notification</string>
     <string name="str_en_ride_history">Ride History</string>
@@ -18,7 +16,7 @@
     <string name="str_en_for_reservations_please_call_us_on">For Reservations, Please Call us on :</string>
     <string name="str_en_or">OR</string>
     <string name="str_en_email_us_at">Email us at:</string>
-    <string name="str_en_uffride_gmail_com">uffride@gmail.com</string>
+    <string name="str_en_uffride_gmail_com">uride@gmail.com</string>
     <string name="str_en_bookings_uffride_com">bookings@uffride.com</string>
     <string name="str_en_login_failed">Login Failed!!!</string>
     <string name="str_en_drop_off_address">Drop Off Address</string>
@@ -142,11 +140,6 @@
     <string name="str_en_note_inorder_to_start_accepting_ride_request_please_add_a_valid_card">Note: Inorder to start accepting ride request please add a valid card.</string>
     <string name="str_en_no_internet">No internet connection.</string>
     <string name="str_en_get_direction_caps">GET DIRECTION</string>
-
-    <string-array name="vehicle_type">
-        <item>Four Wheeler</item>
-        <item>Two Wheeler</item>
-    </string-array>
     <string name="title_activity_maps">Map</string>
     <string name="str_en_upload_vehicle_photo">UPLOAD VEHICLE PHOTO</string>
     <string name="str_en_enter_brand">Enter Brand</string>

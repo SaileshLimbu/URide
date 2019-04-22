@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import np.com.softwarica.uride.R;
-import np.com.softwarica.uride.activities.MainActivity;
+import np.com.softwarica.uride.activities.passengers.UserDashboardActivity;
 import np.com.softwarica.uride.adapters.SpinnerCarAdapter;
 import np.com.softwarica.uride.databinding.ActivityRegisterDriverBinding;
 import np.com.softwarica.uride.models.CarItem;
@@ -90,7 +90,7 @@ public class RegisterDriverActivity extends AppCompatActivity {
         database.child("drivers").child(FirebaseUtils.userId).setValue(driverData).addOnCompleteListener(task -> {
             dialog.dismiss();
             if (task.isSuccessful()) {
-                startActivity(new Intent(RegisterDriverActivity.this, MainActivity.class));
+                startActivity(new Intent(RegisterDriverActivity.this, UserDashboardActivity.class));
                 finish();
             } else {
                 ToastUtils.showErrorToast(RegisterDriverActivity.this, task.getException().getMessage());

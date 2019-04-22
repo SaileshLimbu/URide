@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import np.com.softwarica.uride.R;
+import np.com.softwarica.uride.activities.passengers.UserDashboardActivity;
 import np.com.softwarica.uride.databinding.ActivitySignupCompleteBinding;
 import np.com.softwarica.uride.utils.SharedPref;
 
@@ -28,9 +29,9 @@ public class SignupCompleteActivity extends AppCompatActivity {
 
     public void onDonePressed(View view) {
         if (SharedPref.getString(this, "isDriver").equals("true")) {
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, UserDashboardActivity.class));
         } else {
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, UserDashboardActivity.class));
         }
         finish();
     }

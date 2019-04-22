@@ -28,6 +28,7 @@ import java.util.concurrent.TimeUnit;
 
 import np.com.softwarica.uride.R;
 import np.com.softwarica.uride.activities.passengers.RegisterPassengerActivity;
+import np.com.softwarica.uride.activities.passengers.UserDashboardActivity;
 import np.com.softwarica.uride.databinding.ActivityVerificationBinding;
 import np.com.softwarica.uride.utils.NetworkUtils;
 import np.com.softwarica.uride.utils.SharedPref;
@@ -155,7 +156,7 @@ public class VerificationActivity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.hasChild(user.getUid())) {
                             //openActivity(UserDashboardActivity.class);
-                            openActivity(MainActivity.class);
+                            openActivity(UserDashboardActivity.class);
                             finish();
                         } else {
                             //Layer2
@@ -165,7 +166,7 @@ public class VerificationActivity extends AppCompatActivity {
                                     if (dataSnapshot.hasChild(user.getUid())) {
                                         SharedPref.setString(VerificationActivity.this, "isDriver", "true");
                                         //openActivity(DriverDashboardActivity.class);
-                                        openActivity(MainActivity.class);
+                                        openActivity(UserDashboardActivity.class);
                                         dialog.dismiss();
                                         finish();
                                     } else {

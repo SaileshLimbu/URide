@@ -14,7 +14,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 
 import np.com.softwarica.uride.R;
-import np.com.softwarica.uride.activities.MainActivity;
 import np.com.softwarica.uride.activities.drivers.RegisterDriverActivity;
 import np.com.softwarica.uride.databinding.ActivityRegisterPassengerBinding;
 import np.com.softwarica.uride.utils.FirebaseUtils;
@@ -53,7 +52,7 @@ public class RegisterPassengerActivity extends AppCompatActivity {
     }
 
     public void registerAsUser(View view) {
-        if(!validate()){
+        if (!validate()) {
             return;
         }
 
@@ -73,7 +72,7 @@ public class RegisterPassengerActivity extends AppCompatActivity {
         database.child("users").child(FirebaseUtils.userId).setValue(userData).addOnCompleteListener(task -> {
             dialog.dismiss();
             if (task.isSuccessful()) {
-                startActivity(new Intent(RegisterPassengerActivity.this, MainActivity.class));
+                startActivity(new Intent(RegisterPassengerActivity.this, UserDashboardActivity.class));
                 SharedPref.setString(RegisterPassengerActivity.this, "isDriver", "false");
                 finish();
             } else {
@@ -82,7 +81,7 @@ public class RegisterPassengerActivity extends AppCompatActivity {
         });
     }
 
-    private boolean validate(){
+    private boolean validate() {
         if (!NetworkUtils.isConnected(this)) {
             ToastUtils.showErrorToast(this, getResources().getString(R.string.str_en_no_internet));
             return false;

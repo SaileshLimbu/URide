@@ -24,6 +24,7 @@ import java.util.concurrent.TimeUnit;
 
 import np.com.softwarica.uride.R;
 import np.com.softwarica.uride.activities.passengers.RegisterPassengerActivity;
+import np.com.softwarica.uride.activities.passengers.UserDashboardActivity;
 import np.com.softwarica.uride.databinding.ActivityLoginBinding;
 import np.com.softwarica.uride.utils.NetworkUtils;
 import np.com.softwarica.uride.utils.SharedPref;
@@ -48,6 +49,11 @@ public class LoginActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance().getReference();
         //countryDialCode = SharedPref.getString(this, "phoneCode");
         countryDialCode = "+977";
+
+        if(auth.getCurrentUser() != null){
+            openActivity(UserDashboardActivity.class);
+            finish();
+        }
 
         b.txtCountryCode.setText(countryDialCode);
     }
@@ -80,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                         if (dataSnapshot.hasChild(user.getUid())) {
-                                            openActivity(MainActivity.class);
+                                            openActivity(UserDashboardActivity.class);
                                             finish();
                                         } else {
                                             //Check if FirebaseUser has an account under DRIVER section
@@ -89,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                                     if (dataSnapshot.hasChild(user.getUid())) {
                                                         SharedPref.setString(LoginActivity.this, "isDriver", "true");
-                                                        openActivity(MainActivity.class);
+                                                        openActivity(UserDashboardActivity.class);
                                                         dialog.dismiss();
                                                         finish();
                                                     } else {
