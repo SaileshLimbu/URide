@@ -41,4 +41,8 @@ public class SharedUtils {
         SharedPref.setString(context, "profilePic", profilePic);
         SharedPref.setString(context, "phoneNumber", phoneNumber);
     }
+
+    public static boolean isDriver(Context context) {
+        return SharedPref.getString(context, "isDriver").equals("true");
+    }
 }

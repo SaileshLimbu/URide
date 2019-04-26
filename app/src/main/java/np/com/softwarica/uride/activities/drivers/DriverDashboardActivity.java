@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
@@ -14,8 +13,6 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
@@ -26,17 +23,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.LocationSettingsResult;
-import com.google.android.gms.location.LocationSettingsStates;
-import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -59,6 +45,7 @@ import np.com.softwarica.uride.MyApp;
 import np.com.softwarica.uride.R;
 import np.com.softwarica.uride.Store;
 import np.com.softwarica.uride.activities.LoginActivity;
+import np.com.softwarica.uride.activities.MyAccountActivity;
 import np.com.softwarica.uride.activities.passengers.UserDashboardActivity;
 import np.com.softwarica.uride.callbacks.MyLocationChangeListener;
 import np.com.softwarica.uride.callbacks.UChildEventListener;
@@ -66,13 +53,17 @@ import np.com.softwarica.uride.callbacks.UValueEventListener;
 import np.com.softwarica.uride.databinding.ActivityDriverDashboardBinding;
 import np.com.softwarica.uride.dialogs.AccountReviewDialog;
 import np.com.softwarica.uride.dialogs.AccountVerifiedDialog;
+import np.com.softwarica.uride.managers.NotifyManager;
 import np.com.softwarica.uride.managers.PermissionManager;
 import np.com.softwarica.uride.models.CardDetails;
 import np.com.softwarica.uride.models.RideRequestData;
+import np.com.softwarica.uride.services.DriverLocationService;
+import np.com.softwarica.uride.services.TripListenerService;
 import np.com.softwarica.uride.utils.CryptoUtils;
 import np.com.softwarica.uride.utils.DriverUtils;
 import np.com.softwarica.uride.utils.FirebaseUtils;
 import np.com.softwarica.uride.utils.MapUtils;
+import np.com.softwarica.uride.utils.NetworkUtils;
 import np.com.softwarica.uride.utils.RequestCodeUtils;
 import np.com.softwarica.uride.utils.SharedPref;
 import np.com.softwarica.uride.utils.SharedUtils;
@@ -83,7 +74,7 @@ import np.com.softwarica.uride.utils.TripUtils;
 @SuppressWarnings("ALL")
 public class DriverDashboardActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    private ActivityDriverDashboardBinding binding;
+    private ActivityDriverDashboardBinding b;
     private GoogleMap mMap;
     private String myVehicleType;
     private boolean isCardAdded = false;
@@ -106,7 +97,7 @@ public class DriverDashboardActivity extends AppCompatActivity implements OnMapR
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_driver_dashboard);
+        b = DataBindingUtil.setContentView(this, R.layout.activity_driver_dashboard);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -128,7 +119,7 @@ public class DriverDashboardActivity extends AppCompatActivity implements OnMapR
             return;
         }
         if (!MapUtils.isGPSEnable(this)) {
-            enableGps();
+            NetworkUtils.enableGps(this);
         }
 
         //Clear reject ride request list
@@ -136,65 +127,11 @@ public class DriverDashboardActivity extends AppCompatActivity implements OnMapR
 
     }
 
-    private void enableGps() {
-        GoogleApiClient mGoogleApiClient = new GoogleApiClient.Builder(context)
-                .addApi(LocationServices.API).addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
-                    @Override
-                    public void onConnected(@Nullable Bundle bundle) {
-
-                    }
-
-                    @Override
-                    public void onConnectionSuspended(int i) {
-
-                    }
-                })
-                .addOnConnectionFailedListener(new GoogleApiClient.OnConnectionFailedListener() {
-                    @Override
-                    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-                    }
-                }).build();
-        mGoogleApiClient.connect();
-
-        LocationRequest locationRequest = LocationRequest.create();
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        locationRequest.setInterval(30 * 1000);
-        locationRequest.setFastestInterval(5 * 1000);
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
-                .addLocationRequest(locationRequest);
-
-        builder.setAlwaysShow(true);
-
-        PendingResult<LocationSettingsResult> result = LocationServices.SettingsApi
-                .checkLocationSettings(mGoogleApiClient, builder.build());
-        result.setResultCallback(new ResultCallback<LocationSettingsResult>() {
-            @Override
-            public void onResult(LocationSettingsResult result) {
-                final Status status = result.getStatus();
-                final LocationSettingsStates state = result
-                        .getLocationSettingsStates();
-                switch (status.getStatusCode()) {
-                    case LocationSettingsStatusCodes.SUCCESS:
-                        break;
-                    case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
-                        try {
-                            status.startResolutionForResult(DriverDashboardActivity.this, 1000);
-                        } catch (IntentSender.SendIntentException e) {
-                        }
-                        break;
-                    case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
-                        break;
-                }
-            }
-        });
-    }
-
     public void initNav() {
-        binding.navMenuDriver.navAddPayment.setOnClickListener(view -> startActivity(new Intent(context, AddPaymentActivity.class)));
-        binding.navMenuDriver.navMyRating.setOnClickListener(view -> startActivity(new Intent(context, MyRating.class)));
-        binding.navMenuDriver.pickupMode.setOnCheckedChangeListener((compoundButton, b) -> DriverUtils.changePickupMode(b));
-        binding.pickupMode.setOnCheckedChangeListener((compoundButton, b) -> {
+        b.navMenuDriver.navAddPayment.setOnClickListener(view -> startActivity(new Intent(context, AddPaymentActivity.class)));
+        b.navMenuDriver.navMyRating.setOnClickListener(view -> startActivity(new Intent(context, MyRating.class)));
+        b.navMenuDriver.pickupMode.setOnCheckedChangeListener((compoundButton, b) -> DriverUtils.changePickupMode(b));
+        b.pickupMode.setOnCheckedChangeListener((compoundButton, b) -> {
             DriverUtils.changePickupMode(b);
             if (b) {
                 FirebaseUtils.database.child("trips").addChildEventListener(new TripEventListener(myCurrentLocation != null ? myCurrentLocation : myLastLocation));
@@ -206,9 +143,9 @@ public class DriverDashboardActivity extends AppCompatActivity implements OnMapR
                 listTrip.clear();
             }
         });
-        binding.navMenuDriver.navNotification.setOnClickListener(v -> startActivity(new Intent(context, NotificationAcitivity.class)));
-        binding.navMenuDriver.navTripHistory.setOnClickListener(v -> startActivity(new Intent(context, RideHistory.class)));
-        binding.navMenuDriver.navMyEarning.setOnClickListener(v -> startActivity(new Intent(context, MyEarningActivity.class)));
+        b.navMenuDriver.navNotification.setOnClickListener(v -> startActivity(new Intent(context, NotificationActivity.class)));
+        b.navMenuDriver.navTripHistory.setOnClickListener(v -> startActivity(new Intent(context, RideHistory.class)));
+        b.navMenuDriver.navMyEarning.setOnClickListener(v -> startActivity(new Intent(context, MyEarningActivity.class)));
     }
 
     public void openProfile(View view) {
@@ -284,7 +221,7 @@ public class DriverDashboardActivity extends AppCompatActivity implements OnMapR
         if (requestCode == RequestCodeUtils.GPS_REQUEST_CODE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 if (!MapUtils.isGPSEnable(this)) {
-                    enableGps();
+                    NetworkUtils.enableGps(this);
                     return;
                 }
                 showMyLocation();
@@ -327,7 +264,7 @@ public class DriverDashboardActivity extends AppCompatActivity implements OnMapR
             isOnTrip = (boolean) response.get("isOnTrip");
             myVehicleType = (String) dataSnapshot.child("vehicleInfo/vehicleType").getValue();
 
-            binding.pickupMode.setChecked(pickupModeEnabled);
+            b.pickupMode.setChecked(pickupModeEnabled);
 
             String email = (String) response.get("email");
             String fullName = (String) response.get("fullName");
@@ -350,11 +287,11 @@ public class DriverDashboardActivity extends AppCompatActivity implements OnMapR
             }
 
             if (!profilePic.isEmpty()) {
-                binding.imgProfile.setImageURI(Uri.parse(profilePic));
-                binding.navMenuDriver.imgProfile.setImageURI(Uri.parse(profilePic));
+                b.imgProfile.setImageURI(Uri.parse(profilePic));
+                b.navMenuDriver.imgProfile.setImageURI(Uri.parse(profilePic));
             } else {
-                binding.imgProfile.setImageURI(Uri.parse((String) dataSnapshot.child("vehicleInfo/imageUrl").getValue()));
-                binding.navMenuDriver.imgProfile.setImageURI(Uri.parse((String) dataSnapshot.child("vehicleInfo/imageUrl").getValue()));
+                b.imgProfile.setImageURI(Uri.parse((String) dataSnapshot.child("vehicleInfo/imageUrl").getValue()));
+                b.navMenuDriver.imgProfile.setImageURI(Uri.parse((String) dataSnapshot.child("vehicleInfo/imageUrl").getValue()));
             }
 
             if (!verified && !isAccountReviewedDialogShown) {
@@ -362,14 +299,14 @@ public class DriverDashboardActivity extends AppCompatActivity implements OnMapR
                 isAccountReviewedDialogShown = true;
             }
 
-            binding.navMenuDriver.setVerified(verified);
-            binding.setVerified(verified);
-            binding.navMenuDriver.txtFullname.setText(fullName);
-            binding.navMenuDriver.txtPhoneNumber.setText(phoneNumber);
-            binding.txtTotalTrips.setText(totalTrips);
-            binding.txtTotalEarned.setText(totalEarned);
-            binding.txtDistance.setText(totalDistance);
-            binding.navMenuDriver.pickupMode.setChecked(pickupModeEnabled);
+            b.navMenuDriver.setVerified(verified);
+            b.setVerified(verified);
+            b.navMenuDriver.txtFullname.setText(fullName);
+            b.navMenuDriver.txtPhoneNumber.setText(phoneNumber);
+            b.txtTotalTrips.setText(totalTrips);
+            b.txtTotalEarned.setText(totalEarned);
+            b.txtDistance.setText(totalDistance);
+            b.navMenuDriver.pickupMode.setChecked(pickupModeEnabled);
 
             if (dataSnapshot.hasChild("stripeDetails")) {
                 Store.getInstance().clear();
@@ -546,7 +483,7 @@ public class DriverDashboardActivity extends AppCompatActivity implements OnMapR
     }
 
     public void openDrawerMenu(View view) {
-        binding.drawerLayout.openDrawer(Gravity.START);
+        b.drawerLayout.openDrawer(Gravity.START);
     }
 
     public void startDriverService() {

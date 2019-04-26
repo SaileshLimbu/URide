@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="np.com.gsewa.uffride.activities.drivers.MyAccountActivity">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/imageCover"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#55000000"
+            android:paddingBottom="3dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="3dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageCover">
+
+            <TextView
+                android:id="@+id/txtCarType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand"
+                android:text="Sedan"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/text_size_medium" />
+
+            <TextView
+                android:id="@+id/txtUpdatePhoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:fontFamily="@font/quicksand"
+                android:text="@string/str_en_update_photo"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/text_size_medium" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@id/txtUpdatePhoto"
+                android:src="@drawable/ic_driver_profile_pen" />
+        </RelativeLayout>
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/imgProfilePic"
+            android:layout_width="@dimen/img_size_driver_profile"
+            android:layout_height="@dimen/img_size_driver_profile"
+            android:layout_marginLeft="@dimen/margin_xmedium"
+            android:layout_marginStart="@dimen/margin_xmedium"
+            android:layout_marginTop="@dimen/margin_xmedium"
+            android:src="@drawable/profile_placeholder"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout2"
+            app:roundAsCircle="true" />
+
+        <ImageView
+            android:id="@+id/imgEditProPic"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:layout_constraintCircle="@id/imgProfilePic"
+            app:layout_constraintCircleAngle="45"
+            app:layout_constraintCircleRadius="20dp"
+            app:srcCompat="@drawable/ic_user_profile_pencil"
+            tools:ignore="MissingConstraints" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_medium"
+            android:layout_marginLeft="@dimen/margin_xmedium"
+            android:layout_marginStart="@dimen/margin_xmedium"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/imgProfilePic"
+            app:layout_constraintStart_toEndOf="@+id/imgProfilePic"
+            app:layout_constraintTop_toTopOf="@+id/imgProfilePic">
+
+            <TextView
+                android:id="@+id/txtUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand_bold"
+                android:text="Joseph Murphy"
+                android:textSize="@dimen/text_size_large" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="@+id/imgProfilePic"
+            app:layout_constraintTop_toBottomOf="@+id/imgProfilePic">
+
+            <RelativeLayout
+                android:id="@+id/navMyDocument"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                    android:background="@drawable/drawable_click_animation"
+                android:clickable="true"
+                android:paddingBottom="5dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="5dp">
+
+                <ImageView
+                    android:id="@+id/imageView11"
+                    android:layout_width="@dimen/icon_size_medium"
+                    android:layout_height="@dimen/icon_size_medium"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_driver_nav_document" />
+
+                <TextView
+                    android:id="@+id/textView35"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_toRightOf="@id/imageView11"
+                    android:fontFamily="@font/quicksand_medium"
+                    android:text="@string/str_en_my_documents"
+                    android:textSize="@dimen/text_size_large" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

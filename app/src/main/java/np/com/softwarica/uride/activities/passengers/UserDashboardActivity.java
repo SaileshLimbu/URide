@@ -67,6 +67,7 @@ import np.com.softwarica.uride.Store;
 import np.com.softwarica.uride.activities.LoginActivity;
 import np.com.softwarica.uride.activities.ProfileActivity;
 import np.com.softwarica.uride.activities.drivers.RegisterDriverActivity;
+import np.com.softwarica.uride.callbacks.ConnectionCallBacks;
 import np.com.softwarica.uride.callbacks.MyLocationChangeListener;
 import np.com.softwarica.uride.callbacks.UChildEventListener;
 import np.com.softwarica.uride.callbacks.UValueEventListener;
@@ -136,7 +137,7 @@ public class UserDashboardActivity extends AppCompatActivity implements OnMapRea
         }
 
         if (!MapUtils.isGPSEnable(this)) {
-            enableGps();
+            NetworkUtils.enableGps(this);
         }
 
         if (!NetworkUtils.isConnected(this)) {
@@ -199,53 +200,6 @@ public class UserDashboardActivity extends AppCompatActivity implements OnMapRea
 
         showMyLocation();
         b.layoutCar.getRoot().setAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_up));
-    }
-
-    private void enableGps() {
-        GoogleApiClient mGoogleApiClient = new GoogleApiClient.Builder(context)
-                .addApi(LocationServices.API).addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
-                    @Override
-                    public void onConnected(@Nullable Bundle bundle) {
-
-                    }
-
-                    @Override
-                    public void onConnectionSuspended(int i) {
-
-                    }
-                })
-                .addOnConnectionFailedListener(connectionResult -> {
-                }).build();
-        mGoogleApiClient.connect();
-
-        LocationRequest locationRequest = LocationRequest.create();
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        locationRequest.setInterval(30 * 1000);
-        locationRequest.setFastestInterval(5 * 1000);
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
-                .addLocationRequest(locationRequest);
-
-        builder.setAlwaysShow(true);
-
-        PendingResult<LocationSettingsResult> result = LocationServices.SettingsApi
-                .checkLocationSettings(mGoogleApiClient, builder.build());
-        result.setResultCallback(result1 -> {
-            final Status status = result1.getStatus();
-            final LocationSettingsStates state = result1
-                    .getLocationSettingsStates();
-            switch (status.getStatusCode()) {
-                case LocationSettingsStatusCodes.SUCCESS:
-                    break;
-                case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
-                    try {
-                        status.startResolutionForResult(UserDashboardActivity.this, 1000);
-                    } catch (IntentSender.SendIntentException e) {
-                    }
-                    break;
-                case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
-                    break;
-            }
-        });
     }
 
     private void checkIfUserHasRide() {

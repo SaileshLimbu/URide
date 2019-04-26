@@ -3,6 +3,7 @@
     package="np.com.softwarica.uride">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".MyApp"
@@ -12,7 +13,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.drivers.DriverDashboardActivity"></activity>
+        <activity android:name=".activities.passengers.PickupArrivingActivity"></activity>
+        <activity android:name=".activities.drivers.DriverOnTripActivity" />
+        <activity android:name=".activities.drivers.PayToUrideActivity" />
+        <activity android:name=".activities.drivers.AddFirstPaymentActivity" />
+        <activity android:name=".activities.drivers.RideRequestActivity" />
+        <activity android:name=".activities.drivers.RideHistory" />
+        <activity android:name=".activities.drivers.NotificationActivity" />
+        <activity android:name=".activities.drivers.MyEarningActivity" />
+        <activity android:name=".activities.drivers.MyRating" />
+        <activity android:name=".activities.drivers.AddPaymentActivity" />
+        <activity android:name=".activities.MyAccountActivity" />
+        <activity android:name=".activities.passengers.CancelOptionActivity" />
+        <activity android:name=".activities.drivers.DriverDashboardActivity" />
         <activity android:name=".activities.drivers.RegisterDriverActivity" />
         <activity android:name=".activities.ProfileActivity" />
         <activity android:name=".activities.VerificationActivity" />

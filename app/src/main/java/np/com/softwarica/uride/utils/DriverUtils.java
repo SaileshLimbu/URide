@@ -3,6 +3,7 @@ package np.com.softwarica.uride.utils;
 import android.app.ActivityManager;
 import android.content.Context;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
 
 public class DriverUtils {
@@ -37,5 +38,8 @@ public class DriverUtils {
             }
         }
         return false;
+    }
+    public static void updateDriverLocation(LatLng latLng) {
+        FirebaseUtils.database.child("drivers/" + FirebaseUtils.userId + "/coordinate").setValue(MapUtils.getCordinate(latLng));
     }
 }
