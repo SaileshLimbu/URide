@@ -127,7 +127,7 @@
     <string name="str_en_exp_year">EXP. YEAR</string>
     <string name="str_en_cvc_number">CVC NUMBER</string>
     <string name="str_en_pick_up">PICK UP</string>
-    <string name="str_en_get_direction">Get Direction</string>
+    <string name="str_en_horn_user">Horn User</string>
     <string name="str_en_distance">Distance</string>
     <string name="str_en_start_trip">START TRIP</string>
     <string name="str_en_total_trips">TOTAL TRIPS</string>

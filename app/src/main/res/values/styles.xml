@@ -28,6 +28,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">#fff</item>
     </style>
+
     <style name="AlertDialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -37,5 +38,10 @@
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="progressBar" parent="Theme.AppCompat">
+        <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="colorControlNormal">#ddd</item>
     </style>
 </resources>

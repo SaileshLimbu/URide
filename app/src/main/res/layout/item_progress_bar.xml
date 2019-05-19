@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="0dp"
+            android:layout_height="12dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:max="10"
+            android:progress="0"
+            android:theme="@style/progressBar"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txtRatingIndex"
+            app:layout_constraintTop_toTopOf="@+id/imageView16" />
+
+        <ImageView
+            android:id="@+id/imageView16"
+            android:layout_width="13dp"
+            android:layout_height="14dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_driver_nav_rating" />
+
+        <TextView
+            android:id="@+id/txtRatingIndex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginStart="3dp"
+            android:fontFamily="@font/quicksand_medium"
+            android:text="1"
+            android:textColor="@color/textColorSecondary"
+            android:textSize="10sp"
+            app:layout_constraintStart_toEndOf="@+id/imageView16"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtTotalRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="-5dp"
+            android:fontFamily="@font/quicksand_medium"
+            android:paddingBottom="2dp"
+            android:text="0"
+            android:textColor="@color/textColorSecondary"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progressBar"
+            android:layout_marginRight="8dp" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

@@ -1,9 +1,307 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".activities.drivers.RideRequestActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <data>
+
+        <variable
+            name="item"
+            type="np.com.softwarica.uride.models.RideRequestData" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:padding="20dp">
+
+        <RelativeLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+
+            <ImageView
+                android:layout_width="@dimen/icon_size_medium"
+                android:layout_height="@dimen/icon_size_medium"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="rejectRequest"
+                android:src="@drawable/ic_cross_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/quicksand_bold"
+                android:text="@string/str_en_ride_request"
+                android:textColor="#FFF"
+                android:textSize="@dimen/text_size_large" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/llBottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/drawable_button_dropoff"
+                android:fontFamily="@font/quicksand"
+                android:onClick="rejectRequest"
+                android:text="@string/str_en_reject_request"
+                android:textAllCaps="false"
+                android:textColor="#FFF"
+                android:textSize="@dimen/text_size_large" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginLeft="3dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:fontFamily="@font/quicksand"
+                android:onClick="acceptRide"
+                android:text="@string/str_en_accept_request"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_large" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/llBottom"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="16dp">
+
+            <ImageView
+                android:id="@+id/imageLocation"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="3dp"
+                android:layout_marginRight="3dp"
+                android:src="@drawable/ic_location_pointer" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/imageLocation"
+                android:layout_toRightOf="@id/imageLocation"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/quicksand_light"
+                    android:text="@string/str_en_pickup_address_small"
+                    android:textColor="#eee"
+                    android:textSize="@dimen/text_size_small" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/quicksand_light"
+                    android:text="@{item.pickupAddress}"
+                    android:textColor="#FFF"
+                    android:textSize="@dimen/text_size_medium"
+                    tools:text="9173 Dach Turnpike Suite 815" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/rl1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp">
+
+            <ImageView
+                android:id="@+id/imageTime"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ic_clock" />
+
+            <LinearLayout
+                android:id="@+id/llTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/imageTime"
+                android:layout_toRightOf="@id/imageTime"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/quicksand_light"
+                    android:text="@string/str_en_estimate_time"
+                    android:textColor="#eee"
+                    android:textSize="@dimen/text_size_small" />
+
+                <TextView
+                    android:id="@+id/txtTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/quicksand_light"
+                    android:text="@{item.etaTime}"
+                    android:textColor="#FFF"
+                    android:textSize="@dimen/text_size_medium"
+                    android:transitionName="txtTime"
+                    tools:text="10 Min" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageMoney"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_toEndOf="@id/llTime"
+                android:layout_toRightOf="@id/llTime"
+                android:src="@drawable/ic_money_bag_white" />
+
+            <LinearLayout
+                android:id="@+id/llEarn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/imageMoney"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/quicksand_light"
+                    android:text="@string/str_en_estimate_earning"
+                    android:textColor="#eee"
+                    android:textSize="@dimen/text_size_small" />
+
+                <TextView
+                    android:id="@+id/etaEarning"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/quicksand_light"
+                    android:textColor="#FFF"
+                    android:textSize="@dimen/text_size_medium"
+                    tools:text="$ 5.95" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imgPaymentOption"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_toEndOf="@id/llEarn"
+                android:layout_toRightOf="@id/llEarn"
+                android:src="@drawable/payment_white" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/imgPaymentOption"
+                android:layout_toRightOf="@id/imgPaymentOption"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/quicksand_light"
+                    android:text="@string/str_en_payment_method"
+                    android:textColor="#eee"
+                    android:textSize="@dimen/text_size_small" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/quicksand"
+                    android:text="@{item.paymentOption}"
+                    android:textColor="#FFF"
+                    android:textSize="@dimen/text_size_medium"
+                    tools:text="Cash" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/txtUserFullName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/rl2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="@{item.fullName}"
+            android:textColor="#FFF"
+            android:textSize="@dimen/text_size_large"
+            android:transitionName="txtFullName"
+            tools:text="John Smith" />
+
+        <RelativeLayout
+            android:id="@+id/imgProfilePic"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_above="@+id/txtUserFullName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/drawable_round">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/imgUserPic"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                fresco:failureImage="@drawable/profile_placeholder"
+                fresco:placeholderImage="@drawable/profile_placeholder"
+                fresco:roundAsCircle="true"
+                fresco:roundingBorderColor="#ddd"
+                fresco:roundingBorderWidth="2dp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/imgProfilePic"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/quicksand_light"
+            android:text="@string/str_en_ride_requested_by"
+            android:textColor="#FFF"
+            android:textSize="@dimen/text_size_medium" />
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/text1"
+            android:layout_below="@+id/toolbar" />
+
+    </RelativeLayout>
+</layout>

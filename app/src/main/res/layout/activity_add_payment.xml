@@ -1,9 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activities.drivers.AddPaymentActivity">
+    tools:context=".activities.AddPaymentActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="ifContentScrolls"
+        tools:layout_editor_absoluteY="81dp">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+
+        <EditText
+            android:id="@+id/txtCardNumber"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/drawable_edittext"
+            android:fontFamily="@font/quicksand_medium"
+            android:hint="Card Number"
+            android:inputType="number"
+            android:paddingLeft="10dp"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/uffText" />
+
+
+        <EditText
+            android:id="@+id/txtMonth"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/drawable_edittext"
+            android:fontFamily="@font/quicksand_medium"
+            android:hint="MM"
+            android:inputType="number"
+            android:maxLength="2"
+            android:textAlignment="center"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_large"
+            app:layout_constraintEnd_toStartOf="@+id/txtYear"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/uffText5" />
+
+        <EditText
+            android:id="@+id/txtYear"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/drawable_edittext"
+            android:fontFamily="@font/quicksand_medium"
+            android:hint="YY"
+            android:inputType="number"
+            android:maxLength="2"
+            android:textAlignment="center"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txtMonth"
+            app:layout_constraintTop_toBottomOf="@+id/uffText3" />
+
+        <TextView
+            android:id="@+id/uffText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/quicksand_medium"
+            android:text="@string/str_en_enter_card_number"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <EditText
+            android:id="@+id/txtCvc"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/drawable_edittext"
+            android:fontFamily="@font/quicksand_medium"
+            android:hint="CVC"
+            android:inputType="number"
+            android:maxLength="3"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/uffText4" />
+
+        <TextView
+            android:id="@+id/uffText3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/quicksand_medium"
+            android:text="@string/str_en_exp_year"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/uffText5"
+            app:layout_constraintTop_toTopOf="@+id/uffText5" />
+
+        <TextView
+            android:id="@+id/uffText4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/quicksand_medium"
+            android:text="@string/str_en_cvc_number"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtMonth" />
+
+        <TextView
+            android:id="@+id/uffText5"
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/quicksand_medium"
+            android:text="@string/str_en_exp_month"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtCardNumber" />
+
+        <Button
+            android:id="@+id/fancyButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/drawable_button"
+            android:fontFamily="@font/quicksand_medium"
+            android:onClick="addPayment"
+            android:text="@string/str_en_proceed"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtCvc" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/quicksand_medium"
+            android:text="/"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_large"
+            app:layout_constraintEnd_toStartOf="@+id/txtYear"
+            app:layout_constraintStart_toEndOf="@+id/txtMonth"
+            app:layout_constraintTop_toTopOf="@+id/txtYear" />
+
+        <ListView
+            android:id="@+id/listPayment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:divider="@null"
+            android:dividerHeight="4dp"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fancyButton" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
